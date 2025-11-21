@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collect Account By Myth</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* PALET WARNA DARK MODE */
+            --linkedin-blue: #0077b5;
+            --linkedin-glow: #00a0dc;
+            --bg-dark: #000000;
+            --card-bg: rgba(20, 20, 20, 0.85); /* Kaca Hitam */
+            --text-main: #ffffff;
+            --text-sub: #a0a0a0;
+            --input-bg: #1a1a1a;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-list: rgba(255, 255, 255, 0.03);
+            
+            --border-radius: 24px;
+            --error-red: #ff5252; /* Merah lebih terang */
+            --success-green: #00e676; /* Hijau neon */
+            --shadow-soft: 0 20px 50px -10px rgba(0, 119, 181, 0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Sora', sans-serif; 
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+            
+            /* BACKGROUND HITAM GRADASI BIRU GELAP */
+            background: linear-gradient(135deg, #000000, #050f16, #000000, #08121a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Dark Glass */
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Border tipis */
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 20px;
+            min-height: 600px;
+        }
+
+        /* Header */
+        .header { padding: 35px 24px 15px 24px; text-align: center; }
+        
+        .header h1 { 
+            font-size: 24px; font-weight: 700; color: white; 
+            letter-spacing: -0.02em; margin-bottom: 8px; text-transform: uppercase; 
+        }
+
+        .brand-Myth {
+            background: linear-gradient(90deg, var(--linkedin-blue), #00d2ff, var(--linkedin-blue));
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            filter: drop-shadow(0 0 10px rgba(0, 119, 181, 0.5)); /* Efek Neon */
+            animation: textShine 3s linear infinite;
+        }
+        @keyframes textShine { to { background-position: 200% center; } }
+
+        .header p { font-size: 13px; color: var(--text-sub); margin-bottom: 15px; font-weight: 500; }
+        
+        /* Widget Clock Dark */
+        .clock-widget {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 50px;
+            margin-bottom: 10px;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            transition: transform 0.2s;
+        }
+        .clock-widget:active { transform: scale(0.95); }
+        .clock-icon-svg { width: 16px; height: 16px; fill: #ccc; opacity: 0.9; }
+        .clock-text { font-size: 12px; font-weight: 600; color: #ccc; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; }
+
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; transition: background-color 0.3s; }
+        .status-dot.open { background-color: var(--success-green); box-shadow: 0 0 10px var(--success-green); animation: pulseDot 1.5s infinite; }
+        .status-dot.closed { background-color: var(--error-red); box-shadow: 0 0 10px var(--error-red); }
+        @keyframes pulseDot { 0% { transform: scale(0.9); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.6; } 100% { transform: scale(0.9); opacity: 1; } }
+
+        .separator { height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent); margin: 15px 0 25px 0; width: 100%; }
+
+        /* Banner Image */
+        .promo-banner {
+            width: 100%; height: auto; border-radius: 16px; margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: block; object-fit: cover;
+            opacity: 0; animation: fadeInBanner 0.8s ease forwards;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        @keyframes fadeInBanner { to { opacity: 1; } }
+
+        /* Buttons */
+        .action-area { padding: 0 24px; display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+        
+        .btn {
+            width: 100%; padding: 16px; border: none; border-radius: 16px;
+            font-size: 15px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-transform: uppercase; letter-spacing: 0.5px;
+            position: relative; overflow: hidden; z-index: 1; outline: none;
+            font-family: 'Sora', sans-serif; 
+        }
+        .btn:active { transform: scale(0.97) !important; }
+
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--linkedin-blue), #005a8c); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4); /* Glow Biru */
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .btn-secondary { 
+            background-color: transparent; color: white; 
+            border: 2px solid var(--linkedin-blue); 
+            transition: all 0.3s ease; 
+        }
+        .btn-secondary::before { content: ""; position: absolute; top: 0; left: 0; width: 0%; height: 100%; background-color: var(--linkedin-blue); z-index: -1; transition: width 0.3s ease; }
+        .btn-secondary:hover { color: white; }
+        .btn-secondary:hover::before { width: 100%; }
+        
+        .btn.closed-mode { filter: grayscale(1) brightness(0.5); opacity: 0.6; }
+
+        @keyframes shakeEffect { 0% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-6px); } 100% { transform: translateX(0); } }
+        .btn-error-shake { animation: shakeEffect 0.4s ease-in-out; background: var(--error-red) !important; border-color: var(--error-red) !important; color: white !important; box-shadow: 0 0 20px rgba(255, 82, 82, 0.4) !important; }
+
+        /* Sections & List Dark */
+        .section { padding: 0 24px; margin-bottom: 24px; }
+        .section-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #ffffff; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+        
+        .info-list { list-style: none; background: var(--accent-list); border-radius: 16px; padding: 18px; border: 1px solid var(--border-color); }
+        
+        .info-list li { 
+            font-size: 13px; color: #ccc; margin-bottom: 10px; padding-left: 24px; 
+            position: relative; font-weight: 500; opacity: 0; 
+            transform: translateY(10px); animation: fadeInUp 0.5s ease forwards; 
+            transition: transform 0.2s ease, color 0.2s; 
+        }
+        .info-list li:nth-child(1) { animation-delay: 0.1s; }
+        .info-list li:nth-child(2) { animation-delay: 0.2s; }
+        .info-list li:hover { transform: translateX(5px); color: var(--linkedin-blue); }
+        .info-list li:last-child { margin-bottom: 0; }
+        
+        .info-list li::before { 
+            content: "✓"; color: #fff; font-weight: 800; font-size: 12px; 
+            position: absolute; left: 0; top: 1px; 
+            background: var(--linkedin-blue); width: 18px; height: 18px; 
+            display: flex; justify-content: center; align-items: center; border-radius: 50%;
+            box-shadow: 0 0 8px rgba(0, 119, 181, 0.6);
+        }
+        
+        .rate-list li span { font-weight: 700; color: #4db6ff; background: rgba(0, 119, 181, 0.15); padding: 2px 8px; border-radius: 6px; }
+
+        /* Special Rules Dark */
+        .special-rules { 
+            margin: 24px; 
+            background: linear-gradient(135deg, rgba(0, 119, 181, 0.05), rgba(0, 0, 0, 0.3)); 
+            border: 1px solid var(--linkedin-blue); 
+            border-radius: 16px; padding: 20px; position: relative; overflow: hidden; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+        }
+        .special-rules::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--linkedin-blue); box-shadow: 0 0 10px var(--linkedin-blue); }
+        .special-rules::after { content: ""; position: absolute; top: 0; left: -150%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transform: skewX(-25deg); animation: shimmerEffect 6s infinite; pointer-events: none; }
+        @keyframes shimmerEffect { 0% { left: -150%; } 20% { left: 150%; } 100% { left: 150%; } }
+        
+        .special-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 14px; text-transform: uppercase; display: block; position: relative; z-index: 1; letter-spacing: 0.5px; }
+        .special-list { list-style: none; position: relative; z-index: 1; }
+        .special-list li { font-size: 13px; font-weight: 500; color: #ccc; margin-bottom: 10px; display: flex; align-items: start; line-height: 1.4; opacity: 0; transform: translateY(10px); animation: fadeInUp 0.5s ease forwards; }
+        .special-list li:nth-child(1) { animation-delay: 0.4s; }
+        .special-list li:nth-child(2) { animation-delay: 0.5s; }
+        .special-list li:nth-child(3) { animation-delay: 0.6s; }
+        .special-list li svg { flex-shrink: 0; margin-right: 10px; margin-top: 2px; fill: var(--linkedin-blue); filter: drop-shadow(0 0 5px var(--linkedin-blue)); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Footer */
+        .footer { text-align: center; padding: 20px 24px 15px; font-size: 11px; color: #666; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px; }
+        .footer span { font-weight: 700; color: var(--linkedin-blue); }
+
+        /* Form Overlay Dark */
+        .form-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #0d0d0d; /* Latar Form Hitam */
+            z-index: 100; padding: 24px; display: flex; flex-direction: column; 
+            transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1); 
+            border-radius: 24px 24px 0 0; 
+        }
+        .form-overlay.active { transform: translateY(0); border-radius: 0; }
+        
+        .form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .form-header h2 { font-size: 20px; font-weight: 700; color: white; }
+        
+        .close-btn { width: 40px; height: 40px; border-radius: 50%; border: none; background: #1f1f1f; color: #999; font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .close-btn:hover { background: #333; color: white; transform: rotate(90deg); }
+
+        .form-group { margin-bottom: 20px; transition: all 0.3s ease; }
+        .form-group.hidden { display: none; }
+        .form-label { display: block; font-size: 12px; font-weight: 700; color: #ccc; margin-bottom: 8px; }
+        
+        .input-wrapper { position: relative; }
+        .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; fill: #666; transition: fill 0.2s; pointer-events: none; }
+        
+        .form-input { 
+            width: 100%; padding: 16px 16px 16px 48px; 
+            border: 1px solid #333; border-radius: 14px; 
+            font-size: 14px; font-family: 'Sora', sans-serif; font-weight: 500; 
+            outline: none; transition: all 0.2s; 
+            color: white; background: var(--input-bg); 
+        }
+        .form-input:focus { border-color: var(--linkedin-blue); box-shadow: 0 0 0 2px rgba(0, 119, 181, 0.3); background: #252525; }
+        .form-input:focus + .input-icon, .form-input:not(:placeholder-shown) + .input-icon { fill: var(--linkedin-blue); }
+        
+        .code-badge { background-color: rgba(0, 119, 181, 0.15); border: 1px dashed var(--linkedin-blue); color: #4db6ff; font-weight: 700; text-align: center; letter-spacing: 2px; cursor: default; padding-left: 16px !important; }
+        .form-input:invalid:not(:placeholder-shown) { border-color: var(--error-red); background: rgba(255, 82, 82, 0.05); }
+        
+        .warning-msg { color: var(--error-red); font-size: 12px; font-weight: 600; margin-top: 8px; display: none; padding-left: 4px; display: flex; align-items: center; gap: 5px; animation: fadeIn 0.3s ease; }
+        .warning-msg::before { content: "⚠"; font-size: 14px; }
+        .warning-msg.active { display: flex; }
+        .input-error { border-color: var(--error-red) !important; }
+
+        /* --- MODAL POPUP DARK --- */
+        .modal-backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
+            z-index: 200; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .modal-backdrop.show { opacity: 1; pointer-events: auto; }
+        .modal-card {
+            background: #1a1a1a; width: 85%; max-width: 320px;
+            border-radius: 24px; padding: 30px 20px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #333;
+            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-backdrop.show .modal-card { transform: scale(1); }
+        .modal-icon { width: 60px; height: 60px; background: rgba(255, 82, 82, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 15px; color: #ff5252; }
+        .modal-icon svg { width: 30px; height: 30px; fill: currentColor; }
+        .modal-title { font-size: 18px; font-weight: 800; color: white; margin-bottom: 8px; }
+        .modal-desc { font-size: 14px; color: #aaa; margin-bottom: 20px; font-weight: 500; }
+        .modal-btn { background: white; color: black; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 700; font-family: 'Sora', sans-serif; cursor: pointer; width: 100%; font-size: 14px; transition: transform 0.2s; }
+        .modal-btn:active { transform: scale(0.95); }
+
+        /* Toast */
+        .toast { visibility: hidden; min-width: 260px; background-color: #333; color: #fff; text-align: center; border-radius: 50px; padding: 16px 24px; position: fixed; z-index: 200; left: 50%; bottom: 40px; transform: translateX(-50%); font-size: 13px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5); letter-spacing: 0.5px; border: 1px solid #444; }
+        .toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 40px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="main-view">
+            <div class="header">
+                <h1>Collect Account By <span class="brand-Myth">myth</span></h1>
+                <p>Isi data dengan baik dan benar, serta pastikan sesuai kriteria</p>
+                
+                <div class="clock-widget">
+                    <div id="status-dot" class="status-dot"></div>
+                    <svg class="clock-icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <span class="clock-text">21:00 - 05:00 WIB</span>
+                </div>
+
+                <div class="separator"></div>
+            </div>
+
+            <div class="action-area">
+                <img src="Baner.gif" alt="Promo Banner" class="promo-banner">
+
+                <button id="btn-new" class="btn btn-primary" onclick="checkTimeAndOpen('new', this)">New Acc</button>
+                <button id="btn-unrestric" class="btn btn-secondary" onclick="checkTimeAndOpen('unrestric', this)">Unrestric</button>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Kriteria</div>
+                <ul class="info-list">
+                    <li>Pembuatan Min Oktober 2024</li>
+                    <li>Koneksi min 30</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Rate Sewa?</div>
+                <ul class="info-list rate-list">
+                    <li><span>New Acc $12 ( 192rb )</span> — restric tetap Full Payment.</li>
+                    <li><span>Unrestrict $17 ( 272rb )</span></li>
+                </ul>
+            </div>
+
+            <div class="special-rules">
+                <span class="special-title">★ Spesial Rules By Myth</span>
+                <ul class="special-list">
+                    <li><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg> Terkena restric pas awal sewa tetap Full payment.</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg> Bisa 1 Rekening kalau bawa Member banyak.</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg> Bisa Payment via USDT kalau Bawa member diatas 10.</li>
+                </ul>
+            </div>
+            <div class="footer">&copy; 2024 Collect Account By <span>Myth</span>. All rights reserved.</div>
+        </div>
+
+        <div id="form-overlay" class="form-overlay">
+            <div class="form-header">
+                <h2 id="form-title">Form New Acc</h2>
+                <button class="close-btn" onclick="closeForm()">&times;</button>
+            </div>
+
+            <form id="rentalForm">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" class="form-input" placeholder="Masukkan email akun" required>
+                        <svg class="input-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="password" class="form-input" placeholder="Masukkan password" required>
+                        <svg class="input-icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                    </div>
+                </div>
+
+                <div class="form-group" id="group-koneksi">
+                    <label class="form-label">Koneksi</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="connections" class="form-input" placeholder="Min 30" oninput="checkConnection()">
+                        <svg class="input-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <div id="conn-warning" class="warning-msg">Gb dulu Bosku min 30 koneksi</div>
+                </div>
+
+                <div class="form-group" id="group-tahun">
+                    <label class="form-label">Tahun Akun</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="year" class="form-input" placeholder="Contoh: 2024">
+                        <svg class="input-icon" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Kode Unik</label>
+                    <div class="input-wrapper">
+                         <input type="text" id="code" class="form-input code-badge" value="8800" readonly>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <button type="button" id="submit-btn" class="btn btn-primary">Mulai Sewa</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="closed-modal" class="modal-backdrop" onclick="closeModalOutside(event)">
+            <div class="modal-card">
+                <div class="modal-icon">
+                    <svg viewBox="0 0 24 24"><path d="M11.01 21.99C5.44 21.39 1.39 17.34.8 11.77.21 6.2 4.86 1.55 10.41 2c.55.05.95.54.89 1.08-.28 2.48.76 4.97 2.75 6.59 2.26 1.84 5.36 1.84 7.62 0 .47-.38 1.16-.12 1.27.48.57 3.26-1.02 6.61-3.96 8.35-2.07 1.23-4.45 1.62-6.76 1.49h-.21z"/></svg>
+                </div>
+                <h3 class="modal-title">Sewa Tutup!</h3>
+                <p class="modal-desc">Buka jam 9 malam.</p>
+                <button class="modal-btn" onclick="closeModal()">Oke, Mengerti</button>
+            </div>
+        </div>
+
+        <div id="toast" class="toast">Sewa Tutup! Buka jam 21:00 - 05:00</div>
+
+    </div>
+
+    <script>
+        let currentFormType = 'new';
+
+        function isShopOpen() {
+            const now = new Date();
+            const hour = now.getHours();
+            // Buka jam 21:00 - 05:00
+            return (hour >= 21 || hour < 5);
+        }
+
+        window.onload = function() {
+            const statusDot = document.getElementById('status-dot');
+            const btnNew = document.getElementById('btn-new');
+            const btnUnrestric = document.getElementById('btn-unrestric');
+
+            if (isShopOpen()) {
+                statusDot.classList.add('open');
+                statusDot.classList.remove('closed');
+            } else {
+                statusDot.classList.add('closed');
+                statusDot.classList.remove('open');
+                btnNew.classList.add('closed-mode');
+                btnUnrestric.classList.add('closed-mode');
+            }
+        };
+
+        function checkTimeAndOpen(type, btnElement) {
+            if (isShopOpen()) {
+                openForm(type);
+            } else {
+                btnElement.classList.add("btn-error-shake");
+                setTimeout(() => {
+                    btnElement.classList.remove("btn-error-shake");
+                }, 400);
+                // BUKA MODAL
+                document.getElementById("closed-modal").classList.add("show");
+            }
+        }
+
+        function closeModal() { document.getElementById("closed-modal").classList.remove("show"); }
+        function closeModalOutside(event) { if (event.target.id === "closed-modal") { closeModal(); } }
+
+        function openForm(type) {
+            const overlay = document.getElementById("form-overlay");
+            const title = document.getElementById("form-title");
+            const groupKoneksi = document.getElementById("group-koneksi");
+            const groupTahun = document.getElementById("group-tahun");
+            const inputKoneksi = document.getElementById("connections");
+            
+            currentFormType = type;
+            document.getElementById("conn-warning").classList.remove("active");
+            inputKoneksi.classList.remove("input-error");
+
+            if (type === 'new') {
+                title.innerText = "Form New Acc";
+                groupKoneksi.classList.remove("hidden");
+                groupTahun.classList.remove("hidden");
+                inputKoneksi.required = true;
+            } else {
+                title.innerText = "Form Unrestric";
+                groupKoneksi.classList.add("hidden");
+                groupTahun.classList.add("hidden");
+                inputKoneksi.required = false;
+            }
+            overlay.classList.add("active");
+        }
+
+        function closeForm() { document.getElementById("form-overlay").classList.remove("active"); }
+
+        function checkConnection() {
+            const input = document.getElementById("connections");
+            const warning = document.getElementById("conn-warning");
+            const value = parseInt(input.value);
+            if (currentFormType === 'new' && input.value !== "") {
+                if (value < 30) {
+                    warning.classList.add("active");
+                    input.classList.add("input-error");
+                    return false;
+                } else {
+                    warning.classList.remove("active");
+                    input.classList.remove("input-error");
+                    return true;
+                }
+            }
+            warning.classList.remove("active");
+            input.classList.remove("input-error");
+            return true;
+        }
+
+        document.getElementById("submit-btn").addEventListener("click", function(e) {
+            const form = document.getElementById("rentalForm");
+            const btn = this;
+            const isConnectionValid = checkConnection();
+            if (!isConnectionValid || !form.checkValidity()) {
+                form.reportValidity();
+                btn.classList.add("btn-error-shake");
+                setTimeout(() => { btn.classList.remove("btn-error-shake"); }, 400);
+            } else {
+                processSend();
+            }
+        });
+
+        function processSend() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const connections = document.getElementById('connections').value;
+            const year = document.getElementById('year').value;
+            const code = document.getElementById('code').value;
+            let message = "";
+
+            if (currentFormType === 'new') {
+                message = `*New Account Rental Request*\n---------------------------\n*Email:* ${email}\n*Password:* ${password}\n*Connections:* ${connections}\n*Account Year:* ${year}\n*Code:* ${code}`;
+            } else {
+                message = `*Unrestrict Account Rental Request*\n---------------------------\n*Email:* ${email}\n*Password:* ${password}\n*Code:* ${code}`;
+            }
+            const encodedMessage = encodeURIComponent(message);
+            const phoneNumber = "12158209365";
+            const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(waUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>
