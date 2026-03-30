@@ -14,6 +14,11 @@
       box-sizing: border-box;
     }
 
+    /* SMOOTH SCROLL & TRANSITIONS */
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: radial-gradient(circle at top left, #2a4a6a, #0a1a2a);
       font-family: 'Inter', sans-serif;
@@ -369,43 +374,152 @@
     .footer-note { color: #cccccc; font-size: 0.8rem; text-align: center; margin-top: 14px; letter-spacing: 0.3px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
     .footer-note i { color: #b8964b; margin: 0 4px; }
 
-    /* ===== RULES MODAL ===== */
+    /* ===== RULES MODAL - MINIMALIST & CLEAR ===== */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; transition: all 0.3s ease; }
-    .rules-container { max-width: 440px; width: 100%; max-height: 85vh; overflow-y: auto; background-image: url('background.png'); background-size: cover; background-position: center; border-radius: 32px; padding: 24px 20px 28px 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.4); position: relative; }
-    .rules-title { text-align: center; font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: #ffd966; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); border-radius: 40px; padding: 8px 16px; position: relative; }
-    .rules-title i { color: #ffd700; }
-    /* peta atas rules */
-    .map-icon-rules {
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 55px;
-      height: 55px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 50%;
+    .rules-container {
+      max-width: 460px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      background-image: url('background.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 32px;
+      padding: 24px 20px 28px 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      position: relative;
+      scrollbar-width: thin;
+    }
+    .rules-title {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffd966;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(4px);
-      border: 1px solid #b8964b;
-      z-index: 5;
+      border-radius: 40px;
+      padding: 8px 16px;
     }
-    .map-icon-rules img { width: 70%; height: 70%; object-fit: contain; filter: drop-shadow(0 0 4px #ffcc66); }
-    .rules-content-block { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); border-radius: 24px; padding: 16px 14px; margin-bottom: 16px; border: 1px solid rgba(212, 175, 55, 0.25); }
-    .rule-item { display: flex; align-items: center; gap: 12px; background: rgba(0, 0, 0, 0.5); border-radius: 40px; padding: 8px 16px; border-left: 3px solid #d4af37; }
-    .rule-icon { color: #ffd966; width: 28px; font-size: 1rem; text-align: center; }
-    .rule-text { font-family: 'Inter', sans-serif; font-size: 0.85rem; line-height: 1.4; color: #f0e6d2; font-weight: 500; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-    .section-title-block { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: #ffd966; margin: 8px 0 12px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px dashed rgba(212, 175, 55, 0.5); padding-bottom: 6px; }
-    .section-title-block i { color: #ffd966; }
-    .whatsapp-link { display: flex; align-items: center; gap: 10px; background: rgba(0, 0, 0, 0.5); padding: 8px 14px; border-radius: 40px; margin-bottom: 8px; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.2s; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #e0cba0; }
+    .rules-title i { color: #ffd700; }
+    .rules-content-block {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .rules-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .rule-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 32px;
+      padding: 6px 14px;
+      border-left: 2px solid #d4af37;
+    }
+    .rule-icon { color: #ffd966; width: 24px; font-size: 0.9rem; text-align: center; }
+    .rule-text { font-size: 0.8rem; line-height: 1.3; color: #f0e6d2; font-weight: 500; }
+    .section-title-block {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffd966;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.4);
+      padding-bottom: 5px;
+    }
+    .whatsapp-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 12px;
+      border-radius: 40px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      transition: all 0.2s;
+      text-decoration: none;
+      font-size: 0.8rem;
+      color: #e0cba0;
+    }
     .whatsapp-link i { color: #25d366; }
-    .whatsapp-link:hover { background: rgba(212, 175, 55, 0.2); border-color: #d4af37; transform: translateX(3px); color: #ffd966; }
-    .payment-list { list-style: none; padding: 0; margin: 0; }
-    .payment-list li { font-family: 'Inter', sans-serif; font-size: 0.75rem; margin-bottom: 8px; color: #e0d5b0; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-    .payment-list li i { color: #ffd966; width: 18px; margin-top: 2px; }
-    .restrict-text { font-family: 'Inter', sans-serif; font-size: 0.8rem; line-height: 1.45; color: #e0d5b0; margin-bottom: 10px; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-    .close-btn { background: transparent; border: 2px solid #d4af37; border-radius: 40px; padding: 10px 20px; color: #ffd966; font-family: 'Cinzel', serif; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 16px; width: 100%; background: rgba(0, 0, 0, 0.5); }
+    .whatsapp-link:hover { background: rgba(212, 175, 55, 0.2); border-color: #d4af37; transform: translateX(3px); }
+    .payment-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px 0;
+    }
+    .payment-list li {
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      color: #e0d5b0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.3;
+    }
+    .payment-list li i { color: #ffd966; width: 20px; font-size: 0.85rem; }
+    .restrict-text {
+      font-size: 0.78rem;
+      line-height: 1.4;
+      color: #e0d5b0;
+      margin-bottom: 8px;
+    }
+    .checkbox-agree-wrapper {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      padding: 12px;
+      margin-top: 8px;
+      border-left: 2px solid #d4af37;
+    }
+    .checkbox-agree-wrapper label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: #f0e6d2;
+    }
+    .checkbox-agree-wrapper input { margin-top: 2px; width: 16px; height: 16px; accent-color: #d4af37; }
+    .checkbox-agree-wrapper small {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.7rem;
+      color: #ffd966;
+      text-align: center;
+    }
+    .close-btn {
+      background: transparent;
+      border: 2px solid #d4af37;
+      border-radius: 40px;
+      padding: 10px 20px;
+      color: #ffd966;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 16px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
     .close-btn:hover { background: #d4af37; color: #1a1a0a; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
 
     /* ===== ADMIN PANEL ===== */
@@ -498,12 +612,12 @@
         <video autoplay loop muted playsinline><source src="banner.mp4" type="video/mp4"></video>
         <div class="banner-header"><span>Sewa Linkedin</span></div>
         <i class="fas fa-user-cog admin-icon-banner" onclick="openAdminPasswordModal()"></i>
-        <div class="skills-overlay"><span class="skill-icon"><i class="fas fa-heart"></i> Myth 💫</span><span class="skill-icon"><i class="fas fa-dharmachakra"></i> 8800</span></div>
+        <div class="skills-overlay"><span class="skill-icon"><i class="fas fa-heart"></i> Pirates 🏴‍☠️</span><span class="skill-icon"><i class="fas fa-dharmachakra"></i> 8800</span></div>
       </div>
       <div class="stats-block">
-        <div class="stat-item"><div class="stat-header"><span>NEW ACC</span><span>Rp. 190.000</span></div><div class="progress-container"><div class="progress-bar-bg"><div class="progress-fill fill-newacc" style="width:100%"></div></div><i class="fas fa-chest chest-icon" onclick="showNotification('New acc Rp. 190.000')"></i></div></div>
-        <div class="stat-item"><div class="stat-header"><span>UNRESTRICT</span><span>Rp. 270.000</span></div><div class="progress-container"><div class="progress-bar-bg"><div class="progress-fill fill-unrestrict" style="width:100%"></div></div><i class="fas fa-chest chest-icon" onclick="showNotification('Unrestrict Rp 270.000')"></i></div></div>
-        <div class="week-row"><span>Week</span><span class="week-value">21</span></div>
+        <div class="stat-item"><div class="stat-header"><span>NEW ACC</span><span>Rp. 200.000</span></div><div class="progress-container"><div class="progress-bar-bg"><div class="progress-fill fill-newacc" style="width:100%"></div></div><i class="fas fa-chest chest-icon" onclick="showNotification('New acc Rp. 200.000')"></i></div></div>
+        <div class="stat-item"><div class="stat-header"><span>UNRESTRICT</span><span>Rp. 280.000</span></div><div class="progress-container"><div class="progress-bar-bg"><div class="progress-fill fill-unrestrict" style="width:100%"></div></div><i class="fas fa-chest chest-icon" onclick="showNotification('Unrestrict Rp 280.000')"></i></div></div>
+        <div class="week-row"><span>Week</span><span class="week-value">00</span></div>
       </div>
       <div class="streamer-info"><div class="streamer-avatar"><i class="fab fa-linkedin"></i></div><div class="streamer-text">Gabung dapatkan Income setiap Minggu nya!</div></div>
       <div class="floating-nav-container">
@@ -532,8 +646,8 @@
       <div class="progress-checkpoint-simple"><div class="progress-bar-with-runes"><div class="progress-bar-track"></div><div class="progress-bar-fill" id="progressFill" style="width:0%"></div><div class="rune-marker" id="rune1"><i class="fas fa-shopping-cart"></i></div><div class="rune-marker" id="rune2"><i class="fas fa-paper-plane"></i></div><div class="rune-marker" id="rune3"><i class="fas fa-file-alt"></i></div></div></div>
       <div><div class="section-head">RentYour</div><div class="section-head" style="font-size:2rem; margin-top:-8px;">Linkedin</div></div>
       <div class="hero-grid">
-        <div class="hero-card axe" id="cardNewAcc"><div class="hero-avatar"><i class="fab fa-linkedin"></i></div><div class="hero-info"><span class="hero-name">NEW ACC</span></div><div class="account-details"><p><i class="fas fa-check-circle"></i> Join Grup Utama</p><p><i class="fas fa-check-circle"></i> Pembuatan 1 Thn</p><p><i class="fas fa-check-circle"></i> Min 30 koneksi</p><p><i class="fas fa-check-circle"></i>Koneksi lama ❌ bukan baru ditambah </p><p><i class="fas fa-check-circle"></i> Akun Pribadi </p></div><div class="btn-sewa-wrapper"><button class="btn-sewa-icon btn-with-tooltip" id="btnNewAcc" onclick="openFormModal('newacc')"><i class="fas fa-shopping-cart"></i><span class="tooltip-text">Sewa New Acc</span></button></div></div>
-        <div class="hero-card shaker" id="cardUnrestrict"><div class="warning-icon" onclick="showWarningTooltip()"><i class="fas fa-exclamation-triangle"></i></div><div class="hero-avatar"><i class="fab fa-linkedin"></i></div><div class="hero-info"><span class="hero-name">UNRESTRICT</span></div><div class="account-details"><p><i class="fas fa-check-circle"></i> Join Grup Utama</p><p><i class="fas fa-check-circle"></i> Pulih dari Restrict</p><p><i class="fas fa-check-circle"></i> Min 30 koneksi</p><p><i class="fas fa-check-circle"></i> Verifikasi Restrict</p><p><i class="fas fa-check-circle"></i> Pernah Gajian minimal 1x</p></div><div class="btn-sewa-wrapper"><button class="btn-sewa-icon btn-with-tooltip" id="btnUnrestrict" onclick="openFormModal('unrestrict')"><i class="fas fa-shopping-cart"></i><span class="tooltip-text">Sewa Unrestrict</span></button></div></div>
+        <div class="hero-card axe" id="cardNewAcc"><div class="hero-avatar"><i class="fab fa-linkedin"></i></div><div class="hero-info"><span class="hero-name">NEW ACC</span></div><div class="account-details"><p><i class="fas fa-check-circle"></i> Join Grup Utama</p><p><i class="fas fa-check-circle"></i> Pembuatan 1 Thn</p><p><i class="fas fa-check-circle"></i> Min 20 koneksi</p><p><i class="fas fa-check-circle"></i>Koneksi lama ❌ bukan baru ditambah </p><p><i class="fas fa-check-circle"></i> Akun Pribadi </p></div><div class="btn-sewa-wrapper"><button class="btn-sewa-icon btn-with-tooltip" id="btnNewAcc" onclick="openFormModal('newacc')"><i class="fas fa-shopping-cart"></i><span class="tooltip-text">Sewa New Acc</span></button></div></div>
+        <div class="hero-card shaker" id="cardUnrestrict"><div class="warning-icon" onclick="showWarningTooltip()"><i class="fas fa-exclamation-triangle"></i></div><div class="hero-avatar"><i class="fab fa-linkedin"></i></div><div class="hero-info"><span class="hero-name">UNRESTRICT</span></div><div class="account-details"><p><i class="fas fa-check-circle"></i> Join Grup Utama</p><p><i class="fas fa-check-circle"></i> Pulih dari Restrict</p><p><i class="fas fa-check-circle"></i> Min 20 koneksi</p><p><i class="fas fa-check-circle"></i> Verifikasi Restrict</p><p><i class="fas fa-check-circle"></i> Pernah Gajian minimal 1x</p></div><div class="btn-sewa-wrapper"><button class="btn-sewa-icon btn-with-tooltip" id="btnUnrestrict" onclick="openFormModal('unrestrict')"><i class="fas fa-shopping-cart"></i><span class="tooltip-text">Sewa Unrestrict</span></button></div></div>
       </div>
       <div class="sewa-info-text"><i class="fas fa-info-circle"></i> setelah berhasil kirim form & account di approve</div>
       <div class="btn-laporan-wrapper" style="position: relative;">
@@ -574,13 +688,57 @@
 
   <div class="modal-overlay" id="rulesModal">
     <div class="rules-container">
-      <div class="map-icon-rules"><img src="peta.png" alt="peta" draggable="false" oncontextmenu="return false;"></div>
       <div class="rules-title"><i class="fas fa-skull-crossbones"></i> PIRATE'S CODE <i class="fas fa-compass"></i></div>
-      <div class="rules-content-block"><div class="rules-grid"><div class="rule-item"><div class="rule-icon"><i class="fas fa-ship"></i></div><div class="rule-text">Account berumur min 1 Tahun</div></div><div class="rule-item"><div class="rule-icon"><i class="fas fa-coins"></i></div><div class="rule-text">Minimal 30 Koneksi</div></div><div class="rule-item"><div class="rule-icon"><i class="fas fa-skull"></i></div><div class="rule-text">Log out Account sebelum di Sewa</div></div><div class="rule-item"><div class="rule-icon"><i class="fas fa-anchor"></i></div><div class="rule-text">Di larang Log in selama masa sewa</div></div><div class="rule-item"><div class="rule-icon"><i class="fas fa-map-marked-alt"></i></div><div class="rule-text">Di larang Ganti Email</div></div><div class="rule-item"><div class="rule-icon"><i class="fas fa-gem"></i></div><div class="rule-text">Pribadi (bukan hasil Jual / Beli)</div></div><div class="rule-item"><div class="rule-icon"><i class="fas fa-check-circle"></i></div><div class="rule-text">Dapat di verifikasi</div></div></div></div>
-      <div class="rules-content-block"><div class="section-title-block"><i class="fab fa-whatsapp"></i> Crew Gatherings</div><a href="https://chat.whatsapp.com/IFcaj6vk8Z1KfjLJsQtQp4" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Myth (Group Utama)</a><a href="https://chat.whatsapp.com/CWyCMkp0CVGK7SKsXTMrB4?mode=gi_t" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Discussion (Grup Diskusi)</a><a href="https://chat.whatsapp.com/JXopHf4CFs8AaH1ByBwEEL?mode=gi_t" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Restrict Help (Grup Bantuan Restrict)</a></div>
-      <div class="rules-content-block"><div class="section-title-block"><i class="fas fa-coins"></i> Bounty & Payment</div><ul class="payment-list"><li><i class="fas fa-coins"></i> Fee sewa Account: <span style="color:#ffd700;">Rp 190.000</span> minggu</li><li><i class="fas fa-coins"></i> Fee Unrestrict: <span style="color:#ffd700;">Rp 270.000</span></li><li><i class="fas fa-scroll"></i> New Account restrict dibayar setelah un-restrict</li><li><i class="fas fa-scroll"></i> Minggu selanjutnya New Account → Old Account</li><li><i class="fas fa-scroll"></i> Old Account restrict sebelum settlement tidak ada kompensasi</li><li><i class="fas fa-clock"></i> Distribusi tiap Kamis/Jum'at</li><li><i class="fas fa-handshake"></i> Refferer: bisa 1 rekening dengan Referralnya</li><li><i class="fas fa-shield-alt"></i> Full payment setiap minggu jika tidak restrict</li></ul></div>
-      <div class="rules-content-block"><div class="section-title-block"><i class="fas fa-exclamation-triangle"></i> The Curse of Restrict</div><div class="restrict-text">Restrict adalah pembatasan sementara LinkedIn karena penggunaan 2 device atau aktivitas spam.</div><div class="restrict-text">Akun dapat dipulihkan via verifikasi identitas. Join grup bantuan Restrict.</div><div class="restrict-text" style="color: #ffd700;">Bonus Rp270.000 untuk akun berhasil un-restrict (berlaku 1x).</div></div>
-      <button class="close-btn" onclick="closeRulesModal()"><i class="fas fa-compass"></i> AYE, UNDERSTOOD <i class="fas fa-skull-crossbones"></i></button>
+      <div class="rules-content-block">
+        <div class="rules-grid">
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-ship"></i></div><div class="rule-text">Account berumur min 1 Tahun</div></div>
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-coins"></i></div><div class="rule-text">Minimal 20 Koneksi</div></div>
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-skull"></i></div><div class="rule-text">Log out Account sebelum di Sewa</div></div>
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-anchor"></i></div><div class="rule-text">Di larang Log in selama masa sewa</div></div>
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-map-marked-alt"></i></div><div class="rule-text">Di larang Ganti Email</div></div>
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-gem"></i></div><div class="rule-text">Pribadi (bukan hasil Jual / Beli)</div></div>
+          <div class="rule-item"><div class="rule-icon"><i class="fas fa-check-circle"></i></div><div class="rule-text">Dapat di verifikasi</div></div>
+        </div>
+      </div>
+      <div class="rules-content-block">
+        <div class="section-title-block"><i class="fab fa-whatsapp"></i> Crew Gatherings</div>
+        <a href="https://chat.whatsapp.com/IFcaj6vk8Z1KfjLJsQtQp4" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Pirates 🏴‍☠️ (Group Utama)</a>
+        <a href="https://chat.whatsapp.com/CWyCMkp0CVGK7SKsXTMrB4?mode=gi_t" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Discussion (Grup Diskusi)</a>
+        <a href="https://chat.whatsapp.com/JXopHf4CFs8AaH1ByBwEEL?mode=gi_t" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Restrict Help (Grup Bantuan Restrict)</a>
+      </div>
+      <div class="rules-content-block">
+        <div class="section-title-block"><i class="fas fa-coins"></i> Bounty & Payment</div>
+        <ul class="payment-list">
+          <li><i class="fas fa-coins"></i> Fee sewa Account: <span style="color:#ffd700;">Rp 200.000</span> / minggu</li>
+          <li><i class="fas fa-coins"></i> Fee Unrestrict: <span style="color:#ffd700;">Rp 280.000</span></li>
+        </ul>
+        <div style="margin-top: 10px;">
+          <p class="restrict-text"><strong><i class="fas fa-info-circle"></i> Mekanisme Payment:</strong></p>
+          <p class="restrict-text">New account atau akun yang baru pertama kali di sewakan di group, akan mendapat payment setiap minggu nya, jika akunya Running tanpa mengalami Restrict.</p>
+          <p class="restrict-text">Jika terkena restrict sebelum hari kamis, tidak ada kompensasi apapun dan dibayar setelah akun tersebut berhasil un-restrict.</p>
+          <p class="restrict-text">Minggu selanjutnya Status New Account akan menjadi Old Account.</p>
+          <p class="restrict-text">New Account / Old Account jika terkena restrict sebelum settlement tidak ada kompensasi.</p>
+          <p class="restrict-text">Distribusi tiap Kamis/Jum'at. Setiap wallet memiliki charge untuk biaya transfer, akan di potong sesuai kebijakan masing masing perusahaan <strong>(centang setuju) wajib</strong>.</p>
+          <p class="restrict-text">Refferer: bisa 1 rekening dengan Referralnya. Full payment setiap minggu jika tidak restrict.</p>
+        </div>
+      </div>
+      <div class="rules-content-block" style="border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(0,0,0,0.7);">
+        <div class="section-title-block"><i class="fas fa-gavel"></i> Persetujuan & Ketentuan Sewa</div>
+        <div class="checkbox-agree-wrapper">
+          <label>
+            <input type="checkbox" id="agreeRulesCheckbox">
+            <span>saya memahami resiko jika akun saya disewakan, bisa saja terkena restricted batasan sementara oleh Linkedln</span>
+          </label>
+          <small><i class="fas fa-exclamation-triangle"></i> Dengan mencentang, Anda menyatakan telah membaca dan menyetujui seluruh ketentuan di atas.</small>
+        </div>
+      </div>
+      <div class="rules-content-block">
+        <div class="section-title-block"><i class="fas fa-exclamation-triangle"></i> The Curse of Restrict</div>
+        <div class="restrict-text">Restrict adalah pembatasan sementara LinkedIn karena penggunaan 2 device atau aktivitas spam.</div>
+        <div class="restrict-text">Akun dapat dipulihkan via verifikasi identitas. Join grup bantuan Restrict.</div>
+        <div class="restrict-text" style="color: #ffd700;">Bonus Rp280.000 untuk akun berhasil un-restrict (berlaku 1x).</div>
+      </div>
+      <button class="close-btn" onclick="closeRulesModalWithCheck()"><i class="fas fa-compass"></i> AYE, UNDERSTOOD <i class="fas fa-skull-crossbones"></i></button>
     </div>
   </div>
 
@@ -714,7 +872,14 @@
     function openModal() { document.getElementById('modalOverlay').style.display = 'flex'; updateCodeFromEmail(); }
     function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
     function openRulesModal() { document.getElementById('rulesModal').style.display = 'flex'; }
-    function closeRulesModal() { document.getElementById('rulesModal').style.display = 'none'; }
+    function closeRulesModalWithCheck() {
+      const checkbox = document.getElementById('agreeRulesCheckbox');
+      if (!checkbox.checked) {
+        showNotification('Mohon centang persetujuan aturan terlebih dahulu!');
+        return;
+      }
+      document.getElementById('rulesModal').style.display = 'none';
+    }
 
     const BIN_ID = '69b418d0aa77b81da9e035c9';
     const API_KEY = '$2a$10$5FPg7m1Qs/t4whphxNPecOPFqPoIheOnrXIoYAq42A4btApsw0vIm';
