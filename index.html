@@ -782,6 +782,31 @@
     </div>
   </div>
 
+  <!-- BACKGROUND MUSIC - PLAY ON FIRST CLICK -->
+  <audio id="bg-music" loop>
+    <source src="backsound.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    (function() {
+      let played = false;
+      function playMusic() {
+        if (played) return;
+        const audio = document.getElementById('bg-music');
+        if (audio) {
+          audio.play().then(() => {
+            played = true;
+          }).catch(e => console.log('Audio play error:', e));
+          // Remove listener after first click
+          document.removeEventListener('click', playMusic);
+          document.removeEventListener('touchstart', playMusic);
+        }
+      }
+      // Listen for both click and touch for mobile
+      document.addEventListener('click', playMusic);
+      document.addEventListener('touchstart', playMusic);
+    })();
+  </script>
+
   <script>
     // ==================== FUNGSI LENGKAP ====================
     let globalUsers = []; let isProcessing = false; let processedEmails = [];
