@@ -643,9 +643,9 @@
       <h3>NEW ACCOUNT</h3>
       <div class="form-group"><label>Email :</label><input type="email" id="newacc-email" placeholder="contoh@gmail.com"></div>
       <div class="form-group"><label>Password :</label><input type="password" id="newacc-password" placeholder="Isi Password"></div>
-      <div class="form-group"><label>Jumlah Koneksi :</label><input type="text" id="newacc-koneksi" placeholder="Contoh 20"></div>
-      <div class="form-group"><label>Pembuatan Akun :</label><input type="number" id="newacc-age" placeholder="contoh Januari 2025"></div>
-      <div class="form-group"><label>terakhir menambah koneksi :</label><input type="date" id="newacc-last-conn"></div>
+      <div class="form-group"><label>Number of Connections :</label><input type="text" id="newacc-koneksi" placeholder="Contoh 20"></div>
+      <div class="form-group"><label>Age :</label><input type="number" id="newacc-age" placeholder="contoh 2024"></div>
+      <div class="form-group"><label>Last Connection Time :</label><input type="date" id="newacc-last-conn"></div>
       <div class="form-group"><label>Group :</label><input type="text" id="newacc-group" value="0949" readonly></div>
       <button class="btn-form-submit btn-with-tooltip" onclick="submitForm('newacc')"><i class="fas fa-paper-plane"></i></button>
     </div>
@@ -657,8 +657,8 @@
       <h3>UNRESTRICT</h3>
       <div class="form-group"><label>Email :</label><input type="email" id="unrestrict-email" placeholder="contoh@gmail.com"></div>
       <div class="form-group"><label>Password :</label><input type="password" id="unrestrict-password" placeholder="Isi Password"></div>
-      <div class="form-group"><label>Jumlah Koneksi :</label><input type="text" id="unrestrict-koneksi" placeholder="Contoh 20"></div>
-      <div class="form-group"><label>Pembuatan Akun :</label><input type="number" id="unrestrict-age" placeholder="contoh Januari 2025"></div>
+      <div class="form-group"><label>Number of Connections :</label><input type="text" id="unrestrict-koneksi" placeholder="Contoh 20"></div>
+      <div class="form-group"><label>Age :</label><input type="number" id="unrestrict-age" placeholder="contoh 2024"></div>
       <div class="form-group"><label>Group :</label><input type="text" id="unrestrict-group" value="0949" readonly></div>
       <button class="btn-form-submit btn-with-tooltip" onclick="submitForm('unrestrict')"><i class="fas fa-paper-plane"></i></button>
     </div>
@@ -722,7 +722,10 @@
   <div class="modal-overlay" id="rulesModal">
     <div class="rules-container">
       <div class="rules-title"><i class="fas fa-skull-crossbones"></i>Roadmap<i class="fas fa-compass"></i></div>
+      
+      <!-- KRITERIA AKUN -->
       <div class="rules-content-block">
+        <div class="section-title-block"><i class="fas fa-check-circle"></i> Kriteria Akun</div>
         <div class="rules-grid">
           <div class="rule-item"><div class="rule-icon"><i class="fas fa-ship"></i></div><div class="rule-text">Account berumur min 1 Tahun</div></div>
           <div class="rule-item"><div class="rule-icon"><i class="fas fa-coins"></i></div><div class="rule-text">Minimal 20 Koneksi</div></div>
@@ -730,31 +733,38 @@
           <div class="rule-item"><div class="rule-icon"><i class="fas fa-anchor"></i></div><div class="rule-text">Di larang Log in selama masa sewa</div></div>
           <div class="rule-item"><div class="rule-icon"><i class="fas fa-map-marked-alt"></i></div><div class="rule-text">Di larang ubah Email selama masa sewa</div></div>
           <div class="rule-item"><div class="rule-icon"><i class="fas fa-gem"></i></div><div class="rule-text">Pribadi (bukan hasil Jual / Beli)</div></div>
-          <div class="rule-item"><div class="rule-icon"><i class="fas fa-check-circle"></i></div><div class="rule-text">Dapat di verifikasi</div></div>
         </div>
       </div>
+
+      <!-- BOUNTY & PAYMENT -->
+      <div class="rules-content-block">
+        <div class="section-title-block"><i class="fas fa-coins"></i> Bounty & Payment</div>
+        <ul class="payment-list">
+          <li><i class="fas fa-coins"></i> Fee sewa New Account : <span style="color:#ffd700;">Rp 200.000</span> (1x)</li>
+          <li><i class="fas fa-coins"></i> Fee Sewa Old Account : <span style="color:#ffd700;">Rp 190.000</span></li>
+          <li><i class="fas fa-coins"></i> Fee Unrestrict : <span style="color:#ffd700;">Rp 280.000</span></li>
+        </ul>
+        <div>
+          <p class="restrict-text"><strong><i class="fas fa-info-circle"></i> Mekanisme Payment :</strong></p>
+          <p class="restrict-text">New account adalah akun yang baru pertama kali di sewakan di group, akan mendapat payment setiap minggu nya, jika akunya Running tanpa mengalami Restrict sebelum hari Payment (Kamis) .</p>
+          <p class="restrict-text">restrict ❓ jika terkena Restrict sebelum hari kamis, tidak ada kompensasi apapun dan dibayar setelah akun tersebut berhasil un-restrict.</p>
+          <p class="restrict-text">Minggu selanjutnya Status New Account akan menjadi Old Account.</p>
+          <p class="restrict-text">Fee Old Account seterusnya 190.000/ minggu</p>
+          <p class="restrict-text">Bonus Fee Refferal hanya untuk New Account (baru pertama kali disewakan)</p>
+          <p class="restrict-text">Distribusi tiap Kamis / Jum'at</p>
+          <p class="restrict-text">Refferer: bisa 1 rekening dengan Referralnya (bisa hubungi admin)</p>
+        </div>
+      </div>
+
+      <!-- CREW GATHERINGS -->
       <div class="rules-content-block">
         <div class="section-title-block"><i class="fab fa-whatsapp"></i> Crew Gatherings</div>
         <a href="https://chat.whatsapp.com/IFcaj6vk8Z1KfjLJsQtQp4" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Myth (Group Utama)</a>
         <a href="https://chat.whatsapp.com/CWyCMkp0CVGK7SKsXTMrB4?mode=gi_t" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Discussion (Grup Diskusi)</a>
         <a href="https://chat.whatsapp.com/JXopHf4CFs8AaH1ByBwEEL?mode=gi_t" target="_blank" class="whatsapp-link"><i class="fab fa-whatsapp"></i> Restrict Help (Grup Bantuan Restrict)</a>
       </div>
-      <div class="rules-content-block">
-        <div class="section-title-block"><i class="fas fa-coins"></i> Bounty & Payment</div>
-        <ul class="payment-list">
-          <li><i class="fas fa-coins"></i> Fee sewa Account: <span style="color:#ffd700;">Rp 200.000</span> / minggu</li>
-          <li><i class="fas fa-coins"></i> Fee Unrestrict: <span style="color:#ffd700;">Rp 280.000</span></li>
-        </ul>
-        <div>
-          <p class="restrict-text"><strong><i class="fas fa-info-circle"></i> Mekanisme Payment:</strong></p>
-          <p class="restrict-text">New account atau akun yang baru pertama kali di sewakan di group, akan mendapat payment setiap minggu nya, jika akunya Running tanpa mengalami Restrict sebelum hari Payment (Kamis) .</p>
-          <p class="restrict-text">Jika terkena restrict sebelum hari kamis, tidak ada kompensasi apapun dan dibayar setelah akun tersebut berhasil un-restrict.</p>
-          <p class="restrict-text">Minggu selanjutnya Status New Account akan menjadi Old Account.</p>
-          <p class="restrict-text">Bonus Fee Refferal hanya untuk New Account (baru pertama kali disewakan) </p>
-          <p class="restrict-text">Distribusi tiap <strong>Kamis / Jum'at </strong>Setiap wallet memiliki charge untuk biaya transfer, akan di potong sesuai kebijakan masing masing, fee service 2k - 5k </p>
-          <p class="restrict-text">Refferer: bisa 1 rekening dengan Referralnya</p>
-        </div>
-      </div>
+
+      <!-- PERSETUJUAN & KETENTUAN SEWA -->
       <div class="rules-content-block">
         <div class="section-title-block"><i class="fas fa-gavel"></i> Persetujuan & Ketentuan Sewa</div>
         <div class="checkbox-agree-wrapper">
@@ -765,12 +775,15 @@
           <small><i class="fas fa-exclamation-triangle"></i> Admin berhak menahan payment jika penyewa terindikasi berbuat curang / menipu </small>
         </div>
       </div>
+
+      <!-- THE CURSE OF RESTRICT -->
       <div class="rules-content-block">
         <div class="section-title-block"><i class="fas fa-exclamation-triangle"></i> The Curse of Restrict</div>
         <div class="restrict-text">Restrict adalah pembatasan sementara LinkedIn karena penggunaan 2 device atau aktivitas spam.</div>
         <div class="restrict-text">Akun dapat dipulihkan via verifikasi identitas. Join grup bantuan Restrict.</div>
         <div class="restrict-text" style="color: #ffd700;">Bonus Rp280.000 untuk akun berhasil un-restrict (berlaku 1x).</div>
       </div>
+
       <button class="close-btn" onclick="closeRulesModalWithCheck()"><i class="fas fa-compass"></i> AYE, UNDERSTOOD <i class="fas fa-skull-crossbones"></i></button>
     </div>
   </div>
